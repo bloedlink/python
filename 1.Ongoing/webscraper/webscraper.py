@@ -2,26 +2,18 @@ import requests
 from bs4 import BeautifulSoup
 import pprint
 
-def readable(junk):
-    pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(junk)
-
-
 res = requests.get('https://news.ycombinator.com/')
 
-soup = BeautifulSoup(res.text, 'html.parser')
-links = (soup.select('.storylink'))
-votes = (soup.select('.score'))
+soup = BeautifulSoup(res.content,'html.parser')
+title = soup.select('.storylink')
+votes = soup.select('.score')
 
-
-def filtered_page(links,votes):
-    hn = []
-    for i, item in enumerate(links):
-        title = links[i].getText()
-        href = links[i].get('href')
-        hn.append({'title':title,'href':href})
-        points = votes[i].getText()
-        readable(points)
-    return hn
-
-filtered_page(links,votes)
+def webscraper(title,votes):
+    for indx,item in enumerate(title):
+        links = title[indx].getText()
+        print(links)
+        points = votes[indx].getText()
+        print (points)
+        points = votes.getText()
+        print(points)
+webscraper(title,votes)
