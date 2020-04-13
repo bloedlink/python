@@ -14,6 +14,4 @@ def webscraper(title,votes):
         print(links)
         points = votes[indx].getText()
         print (points)
-        points = votes.getText()
-        print(points)
 webscraper(title,votes)
